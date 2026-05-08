@@ -17,7 +17,7 @@ export default function App() {
 
       <div className="todo__todo-list">
         {todos.map((t) => (
-          <TodoItem todo={t} />
+          <TodoItem key={t._id} todo={t} />
         ))}
       </div>
 

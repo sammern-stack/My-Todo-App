@@ -159,9 +159,66 @@ body:has(.todo__content.dark) {
   &__todo-content {
     display: flex;
     gap: 10px;
+    align-items: center;
+    position: relative;
+    color: white;
+    font-weight: 300;
+    cursor: pointer;
+
+    input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .checkmark {
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background: var(--Navy-900);
+      background-clip: content-box, border-box;
+      background-origin: border-box;
+      border: 1px solid var(--Gray-600);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .check-icon {
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        color: white;
+      }
+    }
+
+    input:checked ~ .checkmark {
+      background:
+        linear-gradient(#667eea, #764ba2),
+        linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background-clip: content-box, border-box;
+
+      .check-icon {
+        opacity: 1;
+      }
+    }
   }
 
   &__todo-remove {
     cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      color: var(--Gray-600);
+    }
+  }
+
+  &__todo-item:hover {
+    .todo__todo-remove {
+      opacity: 1;
+    }
   }
 }
