@@ -4,7 +4,7 @@ import { Header, Footer, TodoItem, InsertNewTodo } from "./components";
 import "./App.scss";
 
 export default function App() {
-  useLoadTodos()
+  useLoadTodos();
 
   const theme = useThemeStore((s) => s.theme);
   const todos = useTodosStore((s) => s.todos);
@@ -16,7 +16,7 @@ export default function App() {
       <InsertNewTodo />
 
       <div className="todo__todo-list">
-        {todos.slice(1).map((t) => (
+        {todos.map((t) => (
           <TodoItem todo={t} />
         ))}
       </div>
