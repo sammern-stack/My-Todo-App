@@ -1,10 +1,6 @@
 import { useEffect } from "react";
-import { useThemeStore } from "./stores/useThemeStore";
-import { useTodosStore } from "./stores/useTodosStore";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import TodoItem from "./components/TodoItem";
-import InsertNewTodo from "./components/InsertNewTodo";
+import { useThemeStore, useTodosStore } from "./stores";
+import { Header, Footer, TodoItem, InsertNewTodo } from "./components";
 import "./App.scss";
 
 export default function App() {

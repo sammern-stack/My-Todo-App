@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useTodosStore } from "../stores/useTodosStore";
+import { useTodosStore } from "../stores";
 import { FaPlus } from "react-icons/fa";
 import "../App.scss";
 

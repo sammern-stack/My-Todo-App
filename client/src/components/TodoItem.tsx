@@ -1,4 +1,4 @@
-import { useTodosStore } from "../stores/useTodosStore";
+import { useTodosStore } from "../stores";
 import { FaTimes } from "react-icons/fa";
 import "../App.scss";
 

@@ -1,4 +1,4 @@
-import { useThemeStore } from "../stores/useThemeStore";
+import { useThemeStore } from "../stores";
 import { IoMoon, IoSunny } from "react-icons/io5";
 import "../App.scss";
 
