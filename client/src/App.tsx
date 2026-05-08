@@ -1,74 +1,27 @@
 import { useEffect, useState } from "react";
 import { FaPlus, FaTimes } from "react-icons/fa";
 import { useThemeStore } from "./stores/useThemeStore";
-import { getTodos, createTodo, toggleTodo, deleteTodo } from "./api/todos";
+import { useTodosStore } from "./stores/useTodosStore";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./App.scss";
 
-interface myTodo {
-  _id: string;
-  todo: string;
-  stage: string;
-}
-
 export default function App() {
   const theme = useThemeStore((s) => s.theme);
 
-  const [todos, setTodos] = useState<Array<myTodo>>([]);
-  const [newTodo, setNewTodo] = useState("");
+  const newTodo = useTodosStore((s) => s.newTodo)
+  const setNewTodo = useTodosStore((s) => s.setNewTodo)
+
+  const todos = useTodosStore((s) => s.todos);
+  const getAllTodos = useTodosStore((s) => s.getAllTodos);
+  const createNewTodo = useTodosStore((s) => s.createNewTodo);
+  const toggleTodoStage = useTodosStore((s) => s.toggleTodoStage);
+  const deleteSelectedTodo = useTodosStore((s) => s.deleteSelectedTodo);
+
   const [isHover, setIsHover] = useState<boolean>(false);
 
-  const fetchTodos = async () => {
-    const res = await getTodos();
-
-    if (!res.ok) {
-      console.log(res.error);
-      return;
-    }
-
-    setTodos(res.data);
-  };
-
-  const createNewTodo = async () => {
-    if (!newTodo.trim()) return;
-
-    const todo = newTodo.trim();
-    const res = await createTodo(todo);
-
-    if (!res.ok) {
-      console.log(res.error);
-      return;
-    }
-
-    setTodos((prev) => [...prev, res.data]);
-    setNewTodo("");
-  };
-
-  const toggleTodoStage = async (id: string) => {
-    const res = await toggleTodo(id);
-
-    if (!res.ok) {
-      console.log(res.error);
-      return;
-    }
-
-    setTodos((prev) => prev.map((t) => (t._id === id ? res.data : t)));
-  };
-
-  const handleDeleteTodo = async (id: string) => {
-    const res = await deleteTodo(id);
-
-    if (!res.ok) {
-      console.log(res.error);
-      return;
-    }
-
-    setTodos((prev) => prev.filter((t) => t._id !== id));
-  };
-
   useEffect(() => {
-    fetchTodos();
+    getAllTodos();
   }, []);
 
   return (
@@ -108,7 +61,7 @@ export default function App() {
             </div>
             <div
               className="todo__todo-remove"
-              onClick={() => handleDeleteTodo(_id)}
+              onClick={() => deleteSelectedTodo(_id)}
             >
               <FaTimes />
             </div>
