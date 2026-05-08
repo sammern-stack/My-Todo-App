@@ -1,4 +1,4 @@
-import type { Request, Response } from 'express';
+import type { Request, Response } from "express";
 
 const MyTodosModel = require("../models/todos");
 
@@ -86,10 +86,28 @@ const deleteTodo = async (req: Request, res: Response) => {
   }
 };
 
+const resetTodos = async (req: Request, res: Response) => {
+  try {
+    const todos = await MyTodosModel.find();
+
+    await Promise.all(
+      todos.map((todo: any) =>
+        MyTodosModel.findByIdAndUpdate(todo._id, { stage: "incomplete" }),
+      ),
+    );
+
+    res.status(200).json({ message: "Todos reset successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Failed to reset todos" });
+  }
+};
+
 module.exports = {
   getTodos,
   createTodo,
   updateTodo,
   toggleTodo,
   deleteTodo,
+  resetTodos
 };

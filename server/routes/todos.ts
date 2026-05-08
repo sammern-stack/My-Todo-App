@@ -6,12 +6,13 @@ const {
   updateTodo,
   toggleTodo,
   deleteTodo,
+  resetTodos
 } = require("../controllers/todosControllers");
 
 const router = express.Router();
 
 router.get("/", getTodos);
-
+router.put("/reset", resetTodos);
 router.post("/", createTodo);
 
 router.patch("/:id", updateTodo);
