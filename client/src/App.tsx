@@ -15,10 +15,24 @@ export default function App() {
 
       <InsertNewTodo />
 
-      <div className="todo__todo-list">
-        {todos.map((t) => (
-          <TodoItem key={t._id} todo={t} />
-        ))}
+      <div className="todo__list-content">
+        <div className="todo__list">
+          {todos.map((t) => (
+            <TodoItem key={t._id} todo={t} />
+          ))}
+        </div>
+
+        <div className="todo__list-options">
+          <div className="todo__list-items-left">x items left</div>
+
+          <div className="todo__list-filters">
+            <div className="todo__list-filter">All</div>
+            <div className="todo__list-filter">Completed</div>
+            <div className="todo__list-filter">Active</div>
+          </div>
+
+          <div className="todo__list-clear-completed">Clear completed</div>
+        </div>
       </div>
 
       <Footer />

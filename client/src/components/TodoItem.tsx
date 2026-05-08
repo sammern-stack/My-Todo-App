@@ -16,7 +16,7 @@ export default function TodoItem({ todo }: { todo: todoTypes }) {
   const isCompleted = todo.stage === "complete";
 
   return (
-    <div className="todo__todo-item">
+    <div className="todo__list-item">
       <label className="todo__todo-content">
         <input
           type="checkbox"
@@ -26,7 +26,7 @@ export default function TodoItem({ todo }: { todo: todoTypes }) {
         <span className="checkmark">
           <FaCheck className="check-icon" size={12} />
         </span>
-        {todo.todo}
+        <span className="todo__text">{todo.todo}</span>
       </label>
       <div className="todo__todo-remove" onClick={() => removeTodo(todo._id)}>
         <LiaTimesSolid />
