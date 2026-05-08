@@ -116,12 +116,13 @@ body:has(.todo__content.dark) {
     border: 1px solid var(--Gray-600);
     cursor: pointer;
 
-    &--hover {
-      background: linear-gradient(
-        135deg,
-        hsl(192, 100%, 67%),
-        hsl(280, 87%, 65%)
-      );
+    .plus-icon {
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    &:hover .plus-icon {
+      opacity: 1;
     }
   }
 

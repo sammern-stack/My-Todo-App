@@ -1,26 +1,21 @@
-import { useState } from "react";
 import { useTodosStore } from "../stores";
 import { FaPlus } from "react-icons/fa";
 import "../App.scss";
 
 export default function InsertNewTodo() {
-  const [isHover, setIsHover] = useState<boolean>(false);
-  
   const newTodo = useTodosStore((s) => s.newTodo);
   const setNewTodo = useTodosStore((s) => s.setNewTodo);
-  
+
   const createNewTodo = useTodosStore((s) => s.createNewTodo);
 
   return (
     <div className="todo__add-todo">
       <button
         type="button"
-        className={`todo__add-btn ${isHover && "todo__add-btn--hover"}`}
-        onMouseEnter={() => setIsHover(true)}
-        onMouseLeave={() => setIsHover(false)}
+        className="todo__add-btn"
         onClick={() => createNewTodo()}
       >
-        {isHover && <FaPlus />}
+        <FaPlus size={10} className="plus-icon" />
       </button>
       <input
         type="text"
