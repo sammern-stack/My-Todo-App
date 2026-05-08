@@ -1,17 +1,13 @@
-import { useEffect } from "react";
+import { useLoadTodos } from "./hooks";
 import { useThemeStore, useTodosStore } from "./stores";
 import { Header, Footer, TodoItem, InsertNewTodo } from "./components";
 import "./App.scss";
 
 export default function App() {
+  useLoadTodos()
+
   const theme = useThemeStore((s) => s.theme);
-
   const todos = useTodosStore((s) => s.todos);
-  const getAllTodos = useTodosStore((s) => s.getAllTodos);
-
-  useEffect(() => {
-    getAllTodos();
-  }, []);
 
   return (
     <div className={`todo__content ${theme}`}>
