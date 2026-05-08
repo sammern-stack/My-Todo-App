@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 
-const MyTodosModel = require("../models/MyTodos");
+const MyTodosModel = require("../models/todos");
 
 const getTodos = async (req: Request, res: Response) => {
   try {
