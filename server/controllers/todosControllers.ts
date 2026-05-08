@@ -96,7 +96,8 @@ const resetTodos = async (req: Request, res: Response) => {
       ),
     );
 
-    res.status(200).json({ message: "Todos reset successfully" });
+    const data = await MyTodosModel.find();
+    res.status(200).json(data);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Failed to reset todos" });
@@ -109,5 +110,5 @@ module.exports = {
   updateTodo,
   toggleTodo,
   deleteTodo,
-  resetTodos
+  resetTodos,
 };

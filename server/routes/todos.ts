@@ -12,12 +12,13 @@ const {
 const router = express.Router();
 
 router.get("/", getTodos);
-router.put("/reset", resetTodos);
 router.post("/", createTodo);
 
-router.patch("/:id", updateTodo);
 router.patch("/:id/stage", toggleTodo);
+router.patch("/:id", updateTodo);
 
 router.delete("/:id", deleteTodo);
+
+router.put("/reset", resetTodos);
 
 module.exports = router;
