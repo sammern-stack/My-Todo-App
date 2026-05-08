@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { FaPlus, FaTimes } from "react-icons/fa";
-import { IoMoon, IoSunny } from "react-icons/io5";
+import { useThemeStore } from "./stores/useThemeStore";
 import { getTodos, createTodo, toggleTodo, deleteTodo } from "./api/todos";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import "./App.scss";
-
-type themeOptions = "light" | "dark";
 
 interface myTodo {
   _id: string;
@@ -13,13 +13,11 @@ interface myTodo {
 }
 
 export default function App() {
+  const theme = useThemeStore((s) => s.theme);
+
   const [todos, setTodos] = useState<Array<myTodo>>([]);
   const [newTodo, setNewTodo] = useState("");
   const [isHover, setIsHover] = useState<boolean>(false);
-  const [theme, setTheme] = useState<themeOptions>("dark");
-
-  const toggleTheme = () =>
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
 
   const fetchTodos = async () => {
     const res = await getTodos();
@@ -75,12 +73,7 @@ export default function App() {
 
   return (
     <div className={`todo__content ${theme}`}>
-      <header className="todo__header">
-        <h1 className="todo__title">Todo</h1>
-        <div className="todo__theme-switch" onClick={toggleTheme}>
-          {theme === "dark" ? <IoSunny /> : <IoMoon />}
-        </div>
-      </header>
+      <Header />
 
       <div className="todo__add-todo">
         <button
@@ -123,14 +116,7 @@ export default function App() {
         ))}
       </div>
 
-      <footer className="attribution">
-        Challenge by
-        <a href="https://www.frontendmentor.io?ref=challenge">
-          Frontend Mentor
-        </a>
-        . Coded by
-        <a href="#">Your Name Here</a>.
-      </footer>
+      <Footer />
     </div>
   );
 }
