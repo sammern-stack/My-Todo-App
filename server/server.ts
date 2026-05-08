@@ -19,6 +19,11 @@ const app = express();
 app.use(express.json());
 app.use(cors(corsConfig));
 
+// Routes
+const todosRouter = require("./routes/todos");
+
+app.use("/todos", todosRouter);
+
 // Connect to MongoDB and start the server
 mongoose
   .connect(MONGO_URL)
