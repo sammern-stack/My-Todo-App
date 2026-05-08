@@ -4,7 +4,7 @@ import { createTodo, deleteTodo, getTodos, toggleTodo } from "../api/todos";
 interface todo {
   _id: string;
   todo: string;
-  stage: string;
+  stage: "complete" | "incomplete";
 }
 
 type todosTypes = {

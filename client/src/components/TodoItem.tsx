@@ -5,24 +5,26 @@ import "../App.scss";
 type todoTypes = {
   _id: string;
   todo: string;
-  stage: string;
+  stage: "complete" | "incomplete";
 };
 
 export default function TodoItem({ todo }: { todo: todoTypes }) {
   const toggleTodoStage = useTodosStore((s) => s.toggleTodoStage);
   const deleteSelectedTodo = useTodosStore((s) => s.deleteSelectedTodo);
 
+  const isCompleted = todo.stage === "complete";
+
   return (
     <div className="todo__todo-item">
-      <div className="todo__todo-content">
+      <label className="todo__todo-content">
         <input
           type="checkbox"
           className="todo__completedCheckbox"
-          checked={todo.stage === "complete" ? true : false}
+          checked={isCompleted}
           onChange={() => toggleTodoStage(todo._id)}
         />
-        <div className="todo__todo-name">{todo.todo}</div>
-      </div>
+        {todo.todo}
+      </label>
       <div
         className="todo__todo-remove"
         onClick={() => deleteSelectedTodo(todo._id)}
