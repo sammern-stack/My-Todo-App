@@ -10,7 +10,7 @@ type todoTypes = {
 
 export default function TodoItem({ todo }: { todo: todoTypes }) {
   const toggleTodoStage = useTodosStore((s) => s.toggleTodoStage);
-  const deleteSelectedTodo = useTodosStore((s) => s.deleteSelectedTodo);
+  const removeTodo = useTodosStore((s) => s.removeTodo);
 
   const isCompleted = todo.stage === "complete";
 
@@ -25,10 +25,7 @@ export default function TodoItem({ todo }: { todo: todoTypes }) {
         />
         {todo.todo}
       </label>
-      <div
-        className="todo__todo-remove"
-        onClick={() => deleteSelectedTodo(todo._id)}
-      >
+      <div className="todo__todo-remove" onClick={() => removeTodo(todo._id)}>
         <FaTimes />
       </div>
     </div>

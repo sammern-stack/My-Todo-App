@@ -15,7 +15,7 @@ type todosTypes = {
   getAllTodos: () => void;
   createNewTodo: () => void;
   toggleTodoStage: (id: string) => void;
-  deleteSelectedTodo: (id: string) => void;
+  removeTodo: (id: string) => void;
 };
 
 export const useTodosStore = create<todosTypes>((set, get) => ({
@@ -65,7 +65,7 @@ export const useTodosStore = create<todosTypes>((set, get) => ({
     }));
   },
 
-  deleteSelectedTodo: async (id: string) => {
+  removeTodo: async (id: string) => {
     const res = await deleteTodo(id);
 
     if (!res.ok) {
