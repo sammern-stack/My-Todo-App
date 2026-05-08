@@ -1,22 +1,21 @@
 import { useEffect, useState } from "react";
-import { FaPlus, FaTimes } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 import { useThemeStore } from "./stores/useThemeStore";
 import { useTodosStore } from "./stores/useTodosStore";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import TodoItem from "./components/TodoItem";
 import "./App.scss";
 
 export default function App() {
   const theme = useThemeStore((s) => s.theme);
 
-  const newTodo = useTodosStore((s) => s.newTodo)
-  const setNewTodo = useTodosStore((s) => s.setNewTodo)
+  const newTodo = useTodosStore((s) => s.newTodo);
+  const setNewTodo = useTodosStore((s) => s.setNewTodo);
 
   const todos = useTodosStore((s) => s.todos);
   const getAllTodos = useTodosStore((s) => s.getAllTodos);
   const createNewTodo = useTodosStore((s) => s.createNewTodo);
-  const toggleTodoStage = useTodosStore((s) => s.toggleTodoStage);
-  const deleteSelectedTodo = useTodosStore((s) => s.deleteSelectedTodo);
 
   const [isHover, setIsHover] = useState<boolean>(false);
 
@@ -48,24 +47,8 @@ export default function App() {
       </div>
 
       <div className="todo__todo-list">
-        {todos.slice(1).map(({ _id, todo, stage }) => (
-          <div key={_id} className="todo__todo-item">
-            <div className="todo__todo-content">
-              <input
-                type="checkbox"
-                className="todo__completedCheckbox"
-                checked={stage === "complete" ? true : false}
-                onChange={() => toggleTodoStage(_id)}
-              />
-              <div className="todo__todo-name">{todo}</div>
-            </div>
-            <div
-              className="todo__todo-remove"
-              onClick={() => deleteSelectedTodo(_id)}
-            >
-              <FaTimes />
-            </div>
-          </div>
+        {todos.slice(1).map((t) => (
+          <TodoItem todo={t} />
         ))}
       </div>
 
