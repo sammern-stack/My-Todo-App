@@ -8,6 +8,7 @@ export default function App() {
 
   const theme = useThemeStore((s) => s.theme);
   const todos = useTodosStore((s) => s.todos);
+  const resetTodos = useTodosStore((s) => s.resetTodos);
 
   return (
     <div className={`todo__content ${theme}`}>
@@ -31,7 +32,12 @@ export default function App() {
             <div className="todo__list-filter">Active</div>
           </div>
 
-          <div className="todo__list-clear-completed">Clear completed</div>
+          <div
+            className="todo__list-clear-completed"
+            onClick={() => resetTodos()}
+          >
+            Clear completed
+          </div>
         </div>
       </div>
 

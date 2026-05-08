@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { createTodo, deleteTodo, getTodos, toggleTodo } from "../api/todos";
+import { createTodo, deleteTodo, getTodos, resetTodos, toggleTodo } from "../api/todos";
 
 interface todo {
   _id: string;
@@ -16,6 +16,7 @@ type todosTypes = {
   createNewTodo: () => void;
   toggleTodoStage: (id: string) => void;
   removeTodo: (id: string) => void;
+  resetTodos: () => void;
 };
 
 export const useTodosStore = create<todosTypes>((set, get) => ({
@@ -74,5 +75,16 @@ export const useTodosStore = create<todosTypes>((set, get) => ({
     }
 
     set((prev) => ({ todos: prev.todos.filter((t: todo) => t._id !== id) }));
+  },
+
+  resetTodos: async () => {
+    const res = await resetTodos();
+
+    if (!res.ok) {
+      console.log(res.error);
+      return;
+    }
+
+    set({ todos: res.data });
   },
 }));
