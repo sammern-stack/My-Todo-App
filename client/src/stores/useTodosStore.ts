@@ -1,5 +1,11 @@
 import { create } from "zustand";
-import { createTodo, deleteTodo, getTodos, resetTodos, toggleTodo } from "../api/todos";
+import {
+  createTodo,
+  deleteTodo,
+  getTodos,
+  resetTodos,
+  toggleTodo,
+} from "../api/todos";
 
 interface todo {
   _id: string;
@@ -17,6 +23,9 @@ type todosTypes = {
   toggleTodoStage: (id: string) => void;
   removeTodo: (id: string) => void;
   resetTodos: () => void;
+
+  remainingTodos: number;
+  setRemainingTodos: () => void;
 };
 
 export const useTodosStore = create<todosTypes>((set, get) => ({
@@ -34,6 +43,7 @@ export const useTodosStore = create<todosTypes>((set, get) => ({
     }
 
     set({ todos: res.data });
+    get().setRemainingTodos();
   },
 
   createNewTodo: async () => {
@@ -51,6 +61,7 @@ export const useTodosStore = create<todosTypes>((set, get) => ({
 
     set((prev) => ({ todos: [...prev.todos, res.data] }));
     set({ newTodo: "" });
+    get().setRemainingTodos();
   },
 
   toggleTodoStage: async (id: string) => {
@@ -64,6 +75,7 @@ export const useTodosStore = create<todosTypes>((set, get) => ({
     set((prev) => ({
       todos: prev.todos.map((t) => (t._id === id ? res.data : t)),
     }));
+    get().setRemainingTodos();
   },
 
   removeTodo: async (id: string) => {
@@ -75,6 +87,7 @@ export const useTodosStore = create<todosTypes>((set, get) => ({
     }
 
     set((prev) => ({ todos: prev.todos.filter((t: todo) => t._id !== id) }));
+    get().setRemainingTodos();
   },
 
   resetTodos: async () => {
@@ -86,5 +99,13 @@ export const useTodosStore = create<todosTypes>((set, get) => ({
     }
 
     set({ todos: res.data });
+    get().setRemainingTodos();
   },
+
+  remainingTodos: 0,
+  setRemainingTodos: () =>
+    set({
+      remainingTodos: get().todos.filter((t) => t.stage === "incomplete")
+        .length,
+    }),
 }));

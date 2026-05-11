@@ -8,6 +8,7 @@ export default function App() {
 
   const theme = useThemeStore((s) => s.theme);
   const todos = useTodosStore((s) => s.todos);
+  const remainingTodos = useTodosStore((s) => s.remainingTodos);
   const resetTodos = useTodosStore((s) => s.resetTodos);
 
   return (
@@ -24,7 +25,9 @@ export default function App() {
         </div>
 
         <div className="todo__list-options">
-          <div className="todo__list-items-left">x items left</div>
+          <div className="todo__list-items-left">
+            {remainingTodos} items left
+          </div>
 
           <div className="todo__list-filters">
             <div className="todo__list-filter">All</div>
