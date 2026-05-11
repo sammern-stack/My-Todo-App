@@ -23,9 +23,14 @@
     --Gray-600: hsl(236, 9%, 61%);
 
     --text-color: hsl(0, 0%, 98%);
+    --list-bg: hsl(235, 24%, 19%);
+
+    --option-color: hsl(235, 16%, 43%);
+    --option-hover-color: hsl(234, 39%, 85%);
   }
 
   &.light {
+    --Blue-500: hsl(220, 98%, 61%);
     --Gray-50: hsl(0, 0%, 98%);
     --Purple-300: hsl(234, 39%, 85%);
     --Gray-300: hsl(233, 11%, 84%);
@@ -33,6 +38,10 @@
     --Navy-850: hsl(235, 19%, 35%);
 
     --text-color: hsl(235, 21%, 11%);
+    --list-bg: hsl(0, 0%, 100%);
+
+    --option-color: hsl(236, 9%, 61%);
+    --option-hover-color: hsl(235, 19%, 35%);
   }
 }
 
@@ -43,8 +52,6 @@ img {
 
 /* Global Styles */
 body {
-  background: #fafafa url("../design/images/bg-desktop-dark.jpg") no-repeat;
-  background-size: cover;
   font-family: "Josefin Sans", sans-serif;
   font-size: 18px;
   display: flex;
@@ -53,7 +60,14 @@ body {
 }
 
 body:has(.todo__content.dark) {
+  background: #fafafa url("../design/images/bg-desktop-dark.jpg") no-repeat;
+  background-size: cover;
   background-color: #181824;
+}
+
+body:has(.todo__content.light) {
+  background: #fafafa url("../design/images/bg-desktop-light.jpg") no-repeat;
+  background-size: cover;
 }
 
 .todo {
@@ -100,7 +114,7 @@ body:has(.todo__content.dark) {
     margin-top: 40px;
     padding: 12px;
     border-radius: 5px;
-    background: var(--Navy-900);
+    background: var(--list-bg);
   }
 
   &__add-btn {
@@ -138,7 +152,8 @@ body:has(.todo__content.dark) {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: var(--Navy-900);
+    background: var(--list-bg);
+    box-shadow: 0 0 20px rgb(0 0 0 / 0.2);
     border-radius: 5px;
     margin: 16px 0;
   }
@@ -171,7 +186,7 @@ body:has(.todo__content.dark) {
   }
 
   &__list-items-left {
-    color: var(--Purple-600);
+    color: var(--option-color);
   }
 
   &__list-filters {
@@ -180,11 +195,11 @@ body:has(.todo__content.dark) {
   }
 
   &__list-filter {
-    color: var(--Purple-600);
+    color: var(--option-color);
     transition: all 0.3s ease;
 
     &:hover {
-      color: var(--Purple-300);
+      color: var(--option-hover-color);
       cursor: pointer;
     }
 
@@ -198,11 +213,11 @@ body:has(.todo__content.dark) {
   }
 
   &__list-clear-completed {
-    color: var(--Purple-600);
+    color: var(--option-color);
     transition: all 0.3s ease;
 
     &:hover {
-      color: var(--Purple-300);
+      color: var(--option-hover-color);
       cursor: pointer;
     }
   }
@@ -212,7 +227,7 @@ body:has(.todo__content.dark) {
     gap: 10px;
     align-items: center;
     position: relative;
-    color: white;
+    color: var(--text-color);
     font-weight: 300;
     cursor: pointer;
 
