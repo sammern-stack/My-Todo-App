@@ -103,9 +103,9 @@ export const useTodosStore = create<todosTypes>((set, get) => ({
   },
 
   remainingTodos: 0,
-  setRemainingTodos: () =>
-    set({
-      remainingTodos: get().todos.filter((t) => t.stage === "incomplete")
-        .length,
-    }),
+  setRemainingTodos: () => {
+    const { todos } = get();
+    const remaining = todos.filter((t) => t.stage === "incomplete");
+    set({ remainingTodos: remaining.length });
+  },
 }));
