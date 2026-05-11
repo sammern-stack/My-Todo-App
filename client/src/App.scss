@@ -161,6 +161,7 @@ body:has(.todo__content.dark) {
     align-items: center;
     width: 100%;
     padding: 8px;
+    border-bottom: 1px solid var(--Purple-800);
   }
 
   &__list-options {
@@ -172,6 +173,26 @@ body:has(.todo__content.dark) {
   &__list-filters {
     display: flex;
     gap: 8px;
+  }
+
+  &__list-filter {
+    color: var(--Purple-600);
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: var(--Purple-300);
+      cursor: pointer;
+    }
+  }
+
+  &__list-clear-completed {
+    color: var(--Purple-600);
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: var(--Purple-300);
+      cursor: pointer;
+    }
   }
 
   &__todo-content {

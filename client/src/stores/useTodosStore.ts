@@ -13,6 +13,8 @@ interface todo {
   stage: "complete" | "incomplete";
 }
 
+type filters = "all" | "completed" | "active";
+
 type todosTypes = {
   newTodo: string;
   setNewTodo: (todo: string) => void;
@@ -23,6 +25,7 @@ type todosTypes = {
   toggleTodoStage: (id: string) => void;
   removeTodo: (id: string) => void;
   resetTodos: () => void;
+  filterTodos: (filter: filters) => void;
 
   remainingTodos: number;
   setRemainingTodos: () => void;
@@ -35,14 +38,8 @@ export const useTodosStore = create<todosTypes>((set, get) => ({
   todos: [],
 
   getAllTodos: async () => {
-    const res = await getTodos();
-
-    if (!res.ok) {
-      console.log(res.error);
-      return;
-    }
-
-    set({ todos: res.data });
+    const todos = await fetchTodos();
+    set({ todos: todos });
     get().setRemainingTodos();
   },
 
@@ -108,4 +105,38 @@ export const useTodosStore = create<todosTypes>((set, get) => ({
     const remaining = todos.filter((t) => t.stage === "incomplete");
     set({ remainingTodos: remaining.length });
   },
+
+  filterTodos: async (filter) => {
+    switch (filter) {
+      case "all":
+        get().getAllTodos();
+        break;
+      case "completed":
+        const completedTodos = await fetchTodos();
+        set({
+          todos: completedTodos.filter((t: todo) => t.stage === "complete"),
+        });
+        break;
+      case "active":
+        const activeTodos = await fetchTodos();
+        set({
+          todos: activeTodos.filter((t: todo) => t.stage === "incomplete"),
+        });
+        break;
+      default:
+        break;
+    }
+  },
 }));
+
+// Utility: fetch raw todos
+async function fetchTodos() {
+  const res = await getTodos();
+
+  if (!res.ok) {
+    console.log(res.error);
+    return;
+  }
+
+  return res.data;
+}

@@ -10,6 +10,7 @@ export default function App() {
   const todos = useTodosStore((s) => s.todos);
   const remainingTodos = useTodosStore((s) => s.remainingTodos);
   const resetTodos = useTodosStore((s) => s.resetTodos);
+  const filterTodos = useTodosStore((s) => s.filterTodos);
 
   return (
     <div className={`todo__content ${theme}`}>
@@ -30,9 +31,24 @@ export default function App() {
           </div>
 
           <div className="todo__list-filters">
-            <div className="todo__list-filter">All</div>
-            <div className="todo__list-filter">Completed</div>
-            <div className="todo__list-filter">Active</div>
+            <div
+              className="todo__list-filter"
+              onClick={() => filterTodos("all")}
+            >
+              All
+            </div>
+            <div
+              className="todo__list-filter"
+              onClick={() => filterTodos("completed")}
+            >
+              Completed
+            </div>
+            <div
+              className="todo__list-filter"
+              onClick={() => filterTodos("active")}
+            >
+              Active
+            </div>
           </div>
 
           <div
