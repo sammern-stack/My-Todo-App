@@ -72,3 +72,18 @@ export const deleteTodo = async (id: string) => {
     };
   }
 };
+
+export const resetTodos = async () => {
+  try {
+    const res = await axios.put(`${BASE_URL}/reset`);
+    return { ok: true, data: res.data };
+  } catch (err: any) {
+    console.log(err);
+    return {
+      ok: false,
+      error:
+        err.response?.data?.message ||
+        "An error occur while resetting the todo",
+    };
+  }
+};
