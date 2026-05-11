@@ -170,6 +170,10 @@ body:has(.todo__content.dark) {
     justify-content: space-between;
   }
 
+  &__list-items-left {
+    color: var(--Purple-600);
+  }
+
   &__list-filters {
     display: flex;
     gap: 8px;
