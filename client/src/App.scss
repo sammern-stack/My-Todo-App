@@ -183,6 +183,14 @@ body:has(.todo__content.dark) {
       color: var(--Purple-300);
       cursor: pointer;
     }
+
+    input[type="radio"] {
+      appearance: none;
+    }
+
+    &:has(input[type="radio"]:checked) {
+      color: var(--Blue-500);
+    }
   }
 
   &__list-clear-completed {

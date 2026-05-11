@@ -25,6 +25,9 @@ type todosTypes = {
   toggleTodoStage: (id: string) => void;
   removeTodo: (id: string) => void;
   resetTodos: () => void;
+
+  filter: filters;
+  setFilter: (filter: filters) => void;
   filterTodos: (filter: filters) => void;
 
   remainingTodos: number;
@@ -106,22 +109,28 @@ export const useTodosStore = create<todosTypes>((set, get) => ({
     set({ remainingTodos: remaining.length });
   },
 
+  filter: "all",
+  setFilter: (filter) => set({ filter: filter }),
+
   filterTodos: async (filter) => {
     switch (filter) {
       case "all":
         get().getAllTodos();
+        set({ filter: "all" });
         break;
       case "completed":
         const completedTodos = await fetchTodos();
         set({
           todos: completedTodos.filter((t: todo) => t.stage === "complete"),
         });
+        set({ filter: "completed" });
         break;
       case "active":
         const activeTodos = await fetchTodos();
         set({
           todos: activeTodos.filter((t: todo) => t.stage === "incomplete"),
         });
+        set({ filter: "active" });
         break;
       default:
         break;

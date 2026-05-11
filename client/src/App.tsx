@@ -10,6 +10,7 @@ export default function App() {
   const todos = useTodosStore((s) => s.todos);
   const remainingTodos = useTodosStore((s) => s.remainingTodos);
   const resetTodos = useTodosStore((s) => s.resetTodos);
+  const filter = useTodosStore((s) => s.filter);
   const filterTodos = useTodosStore((s) => s.filterTodos);
 
   return (
@@ -31,24 +32,39 @@ export default function App() {
           </div>
 
           <div className="todo__list-filters">
-            <div
+            <label
               className="todo__list-filter"
               onClick={() => filterTodos("all")}
             >
+              <input
+                type="radio"
+                name="todo-filter"
+                checked={filter === "all"}
+              />
               All
-            </div>
-            <div
+            </label>
+            <label
               className="todo__list-filter"
               onClick={() => filterTodos("completed")}
             >
+              <input
+                type="radio"
+                name="todo-filter"
+                checked={filter === "completed"}
+              />
               Completed
-            </div>
-            <div
+            </label>
+            <label
               className="todo__list-filter"
               onClick={() => filterTodos("active")}
             >
+              <input
+                type="radio"
+                name="todo-filter"
+                checked={filter === "active"}
+              />
               Active
-            </div>
+            </label>
           </div>
 
           <div
